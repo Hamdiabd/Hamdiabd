@@ -1,0 +1,730 @@
+#include <iostream>
+#include<fstream>
+#include<vector>
+#include <string>
+#include<iomanip>
+ using namespace std;
+ const string file = "textst";
+ const string userfile = "usertext";
+ void widhtnumberrecord(); void printshop(); void printbottom(); 
+ struct user {
+   string username;
+   string password;
+   string permissions;
+ };
+
+struct st {
+  string name;
+  string phone;
+  string pincode;
+  string account;
+  double accountbalance;
+};
+bool transacyions_work_main(vector<st>& transactions);
+void main_menue_screen()
+  {
+  cout << endl;
+  cout << left<< "===================================================\n";
+  cout  << "                Main Menue Screen\n";
+  cout << left << "===================================================\n";
+  cout << "        [1] Show Client List.\n";
+  cout << "        [2] Add New Client .\n";
+  cout << "        [3] Delete Client .\n";
+  cout << "        [4] Update Client Info.\n";
+  cout << "        [5] Find Client .\n";
+  cout << "        [6] Transactions.\n";
+  cout << "        [7] Exit  .\n";
+  cout << left << "===================================================\n";
+  cout << " Choose what do you want to do?m[1 to 7] ?  ";
+
+  }
+
+void transactions_screan()
+{
+  cout << endl;
+  cout << left << "===================================================\n";
+  cout << "                trarnsactions Menue Screen\n";
+  cout << left << "===================================================\n";
+  cout << "        [1] Deposit.\n";
+  cout << "        [2] Withdraw .\n";
+  cout << "        [3]  Total Balances .\n";
+  cout << "        [4] Main Menue  .\n";
+  cout << left << "===================================================\n";
+  cout << " Choose what do you want to do?[1 to 4] ?  ";
+
+}
+
+void printrecordinfile(st p)
+{
+  cout <<  "  |"<<left << setw(20) << p.account<< "|" << left << setw(20) << p.pincode << "|" << left << setw(30) << p.name
+     << "|" << left << setw(15) << p.phone  << "|" << left << setw(11) << p.accountbalance <<"|" << endl;
+
+}
+void print_total_balance(vector<st> stvec)
+{
+  double total = 0;
+  cout <<endl<<setw(30)<< "                                Total Balance   \n";
+  cout <<"  " << "-------------------------------------------------------------------------------------------------- \n";
+  cout << "  " << "|  " << left << setw(30) << "Account Nuumber    " << "|" << left << setw(37) << "    Client Name      " << "|" << left << setw(24) << "   Balance " << " |\n";
+  cout << "  " << "--------------------------------------------------------------------------------------------------\n\n";
+  for (st p : stvec)
+  {
+    total += p.accountbalance;
+    cout << "  |" << left << setw(32) << p.account << "|" << left << setw(37) << p.name << "|" << left << setw(25) << p.accountbalance << "|" << endl;
+  }
+  cout <<"\n"<< "  " << "--------------------------------------------------------------------------------------------------\n";
+  cout << endl << setw(30) << "                              Total Balance(" << total << ")" << endl;;
+} 
+
+bool printtheaccountinvector(vector<st>stvec,string sear)
+{
+  bool fond1 = false;
+  for (st k : stvec)
+  {
+    if (k.account == sear) {
+      printshop();
+       printrecordinfile(k); printbottom();
+      fond1 = true;
+    }
+  }
+  return fond1;
+  }
+
+bool checken_in_client_befor_input(vector<st>stvec, string sear)
+{
+  for (st k : stvec)
+  {
+    if (k.account == sear) {
+      return true;
+    }
+  }
+  return false;
+}
+
+void printtheaccountinvector(vector<st>stvec)
+{
+  printshop();
+  for (st k : stvec)
+  {
+       printrecordinfile(k);
+     } printbottom();
+}
+
+vector<string>splitstring(string word, string l)
+{
+
+  vector<string>lin; string h;
+  int m;
+  while (1)
+  {
+    m = word.find(l);
+    if (m == word.npos)
+    {
+      break;
+      cout << "npt";
+    }
+    else {
+      h = word.substr(0, m);
+      lin.push_back(h);
+      m += 4;
+      word.erase(0, m);
+    }
+  } lin.push_back(word);
+  return lin;
+}st spilestring(string line)
+{
+  string l = "#//#";
+  vector<string>sst;
+  sst = splitstring(line, l);
+  st p;  
+  p.account = sst[0];
+  p.pincode = sst[1];
+  p.name = sst[2];
+  p.phone = sst[3];
+  p.accountbalance = stod(sst[4]);
+  
+  return p;
+}
+
+
+void writeinthefile(string sentec)
+{
+  ofstream filest(file, ios::app);
+
+  if (filest.is_open())
+  {
+    filest << sentec << endl;
+  }
+  else cout << "acss in error\n";
+  filest.close();
+}
+void write_in_file_user(string sentec)
+{
+  ofstream filest(userfile, ios::app);
+
+  if (filest.is_open())
+  {
+    filest << sentec << endl;
+  }
+  else cout << "acss in error\n";
+  filest.close();
+}
+void trens_date_user(user p)
+{
+  string w = "#//#";
+
+  string line = "";
+  line += p.username + w;
+  line += p.password + w;
+  line += p.permissions+w;
+  write_in_file_user(line);
+}
+user spile_string_user(string line)
+{
+  string l = "#//#";
+  vector<string>sst;
+  sst = splitstring(line, l);
+  user p;
+
+  if (sst.size() >= 2)
+  {
+    p.username = sst[0];
+    p.password = sst[1];
+    p.permissions = sst[2]; 
+    return p;
+  }
+  else { cout << "error"; }
+  
+} 
+vector<user> read_in_the_file_user()
+{
+ vector<user>stve;
+  ifstream files;
+  files.open(userfile, ios::in);
+  user chec;
+  if (files.is_open())
+  {
+    
+    string line;
+    while (getline(files, line))
+    {
+      chec = spile_string_user(line);
+      stve.push_back(chec);
+
+    }
+    files.close();
+  }
+  else { cout << "Erroe"; }
+  return stve;
+}
+void read_user(user& k){
+
+  char h = 'y';
+  do {
+    cout << "-------------------------------------------\n";
+    cout << "         Add New User Screen\n";
+    cout << "-------------------------------------------\n";
+    cout << "    Adding New User: \n\n";
+
+    cout << "enter Name User?\n "; getline(cin >> ws, k.username);
+    
+    
+    cout << "enter Password user  ? "; getline(cin, k.password);
+    cout << "enter permissions user ? "; getline(cin, k.permissions);
+    
+    cout << "\nadd operation successfully ,";
+    cout << "ead add user,do you want to add y/n \n";
+    trens_date_user(k);
+    cin >> h; h = tolower(h);
+    system("cls");
+
+  }while (h == 'y');
+  }
+void trendate(st p)
+{
+  string w = "#//#";
+  
+  string line = "";
+  line += p.account + w;
+  line += p.pincode + w;
+  line += p.name + w;
+  line += p.phone + w;
+  line += to_string(p.accountbalance);
+  writeinthefile(line);
+}
+
+void readarryst(st& p,vector<st>check1)
+{
+
+  string check=""; char h = 'y';
+  do {
+    cout << "-------------------------------------------\n";
+    cout << "         Add New Client Screen\n";
+    cout << "-------------------------------------------\n";
+    cout << "    Adding New Client: \n\n";
+
+    cout << "enter account numberc? "; getline(cin >> ws, p.account);
+    check = p.account;
+    while (checken_in_client_befor_input(check1, check))
+    {
+      cout << "Client with [" << check << "]" << " aleady exists ,enter another account number? \n";
+      getline(cin >> ws, p.account);
+      check = p.account;
+    }
+    cout << "enter pincode  ? "; getline(cin, p.pincode);
+    cout << "enter name v ? "; getline(cin, p.name);
+    cout << "enter phone  ? "; getline(cin, p.phone);
+    cout << "enter accountbalance ? "; cin >> p.accountbalance;
+
+    cout << "\nadd operation successfully ,";
+    cout << "ead add user,do you want to add y/n \n";
+    trendate(p);
+     cin >> h; h = tolower(h);
+    system("cls");
+
+  } while (h == 'y');
+}
+
+st update_st_read_vector(st& p,string sear)
+{
+  
+    cout << " enter client update \n\n";
+    p.account = sear;
+    cout << "enter pincode  ? "; getline(cin>>ws, p.pincode);
+    cout << "enter name v ? "; getline(cin, p.name);
+    cout << "enter phone  ? "; getline(cin, p.phone);
+    cout << "enter accountbalance ? "; cin >> p.accountbalance;
+    cout << "\n\n nead add user,do you want to add y/n";
+    return p;
+    
+}
+
+void widhtnumberrecord()
+{
+  int count = 0;
+  ifstream filest(file, ios::in);
+  
+  if (filest.is_open())
+  {
+    string line;
+    while (getline(filest, line))
+    {
+      count++;}
+
+  }filest.close();
+  cout << "\n";
+  cout << "                       number(" << count << ")" << "record\n";
+
+}
+
+void printshop()
+{
+  widhtnumberrecord();
+  cout << setw(20) << "  ------------------------------------------------------------------------------------------------------\n";
+  cout << "  |" << left << setw(20) << "account number" << "|" << left << setw(20) << "pin code" << "|"
+    << left << setw(30) << "client name" << "|" << left << setw(15) << "phone" << "|" << left << setw(11) << "balance" << "|" << endl;
+  cout << setw(20) << "  ------------------------------------------------------------------------------------------------------\n";
+
+
+}
+void printbottom()
+{
+  cout << "\n  ------------------------------------------------------------------------------------------------------";
+  cout << endl << endl;
+}
+
+ vector<st>readinthefile()
+{
+  vector<st>stvec;
+  ifstream files(file, ios::in);
+  
+  if (files.is_open())
+  {
+    st chec;
+    string line;
+    while (getline(files, line))
+    {
+      chec=spilestring(line);
+      stvec.push_back(chec);
+
+    }
+    files.close();
+  }
+
+  return stvec;
+}
+
+ string trens_from_vectorst_to_string(st p)
+ {
+   string w = "#//#";
+
+   string line = "";
+   line += p.account + w;
+   line += p.pincode + w;
+   line += p.name + w;
+   line += p.phone + w;
+   line += to_string(p.accountbalance);
+   return line;
+ }
+
+ void write_to_file_form_vectorstring(vector<string>sentec)
+ {
+   ofstream filest;
+   filest.open(file, ios::out);
+
+   if (filest.is_open())
+   {
+     for (string m : sentec)
+     {
+       filest << m << endl;
+       }
+   }
+   else cout << "acss in error\n";
+   filest.close();
+ }
+
+ void trans_vctorst_to_string(vector<st>stvec)
+ {
+   vector<string>record; string word;
+   
+   for (st k : stvec)
+   {
+    word= trens_from_vectorst_to_string(k);
+    record.push_back(word);
+    
+   }
+   write_to_file_form_vectorstring(record);
+
+ }
+
+ vector<st>deletetheaccountinvector(vector<st>&stvec, string sear)
+ {
+   vector<st>deletest;
+   for (st k : stvec)
+   {
+     if (k.account != sear) {
+       deletest.push_back(k);
+     }
+   }
+   return deletest;
+ }
+
+ bool update_client_user_st_vector(vector<st>& stvec, string sear)
+ {
+   st update;
+   for (st &k : stvec)
+   {
+     if (k.account == sear) 
+     {
+       update = k;
+       k=update_st_read_vector(update,sear);
+       trans_vctorst_to_string(stvec);
+       return true;
+       break;
+      
+     }
+    
+   }
+   return false;
+ }
+ bool transactions_depostions_update(vector<st>& stvec, string sear,double fan)
+ {
+   double dep=0.0; 
+   for (st& k : stvec)
+   {
+     if (k.account == sear)
+     {
+       dep = k.accountbalance + fan;
+       k.accountbalance = dep;
+       trans_vctorst_to_string(stvec);
+       return true;
+     }
+
+   }
+  
+   return false;
+ }
+ void depostion_transactions(vector<st>& transactions)
+ {
+   system("cls");
+   cout << "-------------------------------------------\n";
+   cout << "            deposit Screen\n";
+   cout << "-------------------------------------------\n";
+   cout << "    plrase enter accountnumber ? : \n\n";
+   string sear;
+   getline(cin >> ws, sear);
+   if (printtheaccountinvector(transactions, sear))
+   {
+     double dep; cin >> dep;
+     cout << "are you sure you want depostions this client ? y/n\n";
+     char h; cin >> h; h = tolower(h);
+     if (h == 'y')
+     {
+
+       transactions_depostions_update(transactions, sear,dep);
+
+
+       cout << "client depsotions successfuly\n\n";
+     }
+     else { cout << "the operation has been canceled\n\n"; }
+   }
+   else { cout << "\n not fond account(" << sear << ")" << endl; }
+ }
+ bool transactions_withedraw_update(vector<st>& stvec, string sear, double fan)
+ {
+   double dep = 0.0; bool fond = false;
+   for (st& k : stvec)
+   {
+     if (k.account == sear)
+     {
+       if (k.accountbalance >= fan) {
+         dep = k.accountbalance - fan;
+         k.accountbalance = dep; return true;
+       }
+       else { cout << "  the mount is smaller than balance\n"; }
+     }}
+   if (fond) {
+   trans_vctorst_to_string(stvec);
+          }
+   return false;
+ }
+ void withdraw_transactions(vector<st>& transactions)
+ {
+   system("cls");
+   cout << "-------------------------------------------\n";
+   cout << "            Withedraw Screen\n";
+   cout << "-------------------------------------------\n";
+   cout << "    plrase enter accountnumber ? : \n\n";
+   string sear;
+   getline(cin >> ws, sear);
+   if (printtheaccountinvector(transactions, sear))
+   {
+     cout << "accountbalance add\n";
+     double dep; cin >> dep;
+     cout << "are you sure you want depostions this client ? y/n\n";
+     char h; cin >> h; h = tolower(h);
+     if (h == 'y')
+     {
+
+       transactions_withedraw_update(transactions, sear, dep);
+
+
+       cout << "client depsotions successfuly\n\n";
+     }
+     else { cout << "the operation has been canceled\n\n"; }
+   }
+   else { cout << "\n not fond account(" << sear << ")" << endl; }
+ }
+bool workofprograming(vector<st>&accountst)
+{
+  st p; 
+   int x = 1; 
+  while(x) {
+  
+    main_menue_screen();  
+    cin >> x;
+    system("cls");
+    switch (x) {  
+   case 1:
+   {
+     printtheaccountinvector(accountst); system("pause>0"); break;
+     system("cls");
+   }
+   case 2:
+   {
+    
+     readarryst(p,accountst);
+     accountst = readinthefile();
+     
+     system("pause>0");
+     break;
+   }
+    case 3:
+   {
+    
+     string sear;
+     cout << "-------------------------------------------\n";
+     cout << "         delete  Client Screen\n";
+     cout << "-------------------------------------------\n";
+     cout << "    please enter accountnumber : \n\n";
+     getline(cin >> ws, sear);
+     if (printtheaccountinvector(accountst, sear))
+     {
+       cout << "are you sure you want delete this client ? y/n\n";
+       char h; cin >> h; h = tolower(h);
+       if (h == 'y')
+       {
+
+         cout << "    delete account ( " << sear << " )" << endl;
+
+         accountst = deletetheaccountinvector(accountst, sear);
+
+         trans_vctorst_to_string(accountst);
+         cout << "client Delete successfuly\n\n";
+       }
+       else { cout << "the operation has been canceled\n\n"; }
+     }
+     else { cout << "\n not fond account(" << sear << ")" << endl; }
+     
+     system("pause>0");
+     break;
+   }
+  
+   case 4:
+   {
+    
+     string sear;
+     cout << "enter account in user \n";
+     getline(cin >> ws, sear);
+     if (printtheaccountinvector(accountst, sear))
+     {
+       cout << "are you sure you want update this client ? y/n\n";
+       char h; cin >> h; h = tolower(h);
+       if (h == 'y')
+       {
+
+         cout << "    update account ( " << sear << " )" << endl;
+
+         update_client_user_st_vector(accountst, sear);
+
+
+         cout << "client update successfuly\n\n";
+       }
+       else { cout << "the operation has been canceled\n\n"; }
+     }
+     else { cout << "\n not fond account(" << sear << ")" << endl; }
+     system("pause>0"); 
+     break;
+   }
+    case 5:{
+    
+   cout << "-------------------------------------------\n";
+   cout << "           Find  Client Screen\n";
+   cout << "-------------------------------------------\n";
+   cout << "    plrase enter accountnumber ? : \n\n";
+     string sear;
+     cout << "enter account in user \n";
+     getline(cin >> ws, sear);
+     if (!printtheaccountinvector(accountst, sear))
+     {
+       cout << "\n not fond account(" << sear << ")" << endl;
+     }
+     
+     system("pause>0"); break;
+   }
+  case 6: { transacyions_work_main(accountst);
+    break;
+      }
+  default: {;; }
+  
+     }
+  
+  if (x == 7) {
+    
+    cout << "=========================================\n";
+    cout << "            program Ends:-)\n";
+    cout << "=========================================\n";
+
+    return false;
+  }
+  system("cls");
+    } 
+ }
+ bool transacyions_work_main(vector<st>& transactions)
+ {int x = 0;
+   while (1) {
+    
+     transactions_screan();
+     cin >> x;
+     system("cls");
+     switch (x) {
+     case 1: {
+       depostion_transactions(transactions);
+       break;
+     }
+     case 2: {
+      
+       withdraw_transactions(transactions);
+       break;
+     }
+     case 3: {
+       print_total_balance(transactions);
+       break;
+     }
+     case 4: {
+       workofprograming(transactions); break; }
+     }
+    
+         system("pause>0");
+         system("cls");
+   }
+ }
+ bool check_in_user(user p,user k)
+ {
+   bool fond = false;
+   if(p.username ==k.username && p.password==k.password && p.permissions==k.permissions)
+   {
+     fond=true;
+   }
+   return fond;
+ }
+ void chack_screen_user(vector<user> p1)
+ {
+   user p; 
+   bool fond = false;
+   user chec;
+   while (true) {
+     cout << "       SCREAN User\n";
+     cout << "-----------------------------\n";
+     cout << "Ener name User\n";
+     getline(cin>>ws , p.username);
+     cout << "Ener Password User\n";
+     getline(cin , p.password);
+     cout << "Ener permissions User\n";
+     getline(cin , p.permissions);
+     for (user m : p1) {
+       read_in_the_file_user();
+       if (check_in_user(p, chec))
+       {
+         fond = true;
+         break;
+       }
+       else { cout << " THE user NOt Found IN System plass Rapit \n"; }
+     }
+     if(fond==true)
+     {
+       break;
+     }
+   }
+ }
+ void printuser1(user p)
+ {
+   cout << "name  " << p.username << "  password " << p.password << "  " << "permissions " << p.permissions << endl;
+ }
+ void printuser(vector<user> p)
+ {
+   for (user b : p)
+   {
+     printuser1(b);
+   }
+ }
+ int main()
+ {
+ 
+   vector<user>uservector;
+   chack_screen_user(uservector);
+     printuser(uservector);
+   uservector = read_in_the_file_user();
+ 
+
+  system("pause>0");
+  
+  
+  st p; 
+  vector<st>stvector;
+  stvector = readinthefile();
+  workofprograming(stvector); 
+  
+  system("pause>0");
+  
+}
