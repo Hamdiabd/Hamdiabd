@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <title>css and html</title>
+    <style>
+    td,th{border-style:solid;
+        border-width:2px;
+        text-align:center;
+        width:100%;padding:30px;}
+      body{  
+        background-image:url("/project1/واتس-اب-الاخضر-العادي.png");
+    background-repeat:no-repeat;
+    background-position:center top;
+        background-attachment:fixed;
+      }
+        fieldset{
+            width: 400px; height: 250px;
+            margin-top: 20px;
+            -webkit-box-shadow: 1px 1px 1px 1px#888888;
+           
+            overflow:auto;
+       
+     }
+        div{
+            margin-bottom:3px;
+            background: rgb(105, 110, 105);
+            color:white;
+            border-radius: 20px;
+           height: 25px;
+            width: 300px;
+        }
+        p[class="java"],[class="java1"]{
+            border:1px solid black;
+            width: 190px;padding:3px;
+        }
+
+        input{
+            display: block;padding: 5px;
+            margin-bottom: 2px; margin-top:2px 2px;
+            
+        }
+        /* span{min-width: 300px;} */
+        input[type="button"],[type="radio"]{ display: inline-block;}
+        legend{ text-align:center;
+        }
+    </style>
+    </head>
+    <body>
+        <form>
+            <fieldset>
+                <legend >Accounting</legend>
+             <p>Account Yor Age</p>
+             <input type="number"id="sum"placeholder="Enter Age ...">
+             <br><b>    Account :</b>
+             <p class="java"id="java">Account ....</p>
+             <input style="background: rgb(97, 202, 97);padding: 5px;"type="button"value="input page "onclick="print()">
+          </fieldset>
+        </form>
+        <form>
+            <fieldset>
+                <legend>Prodect</legend>
+             
+             <input type="radio"id="bananas"value="500"> <span> Bananas One Kiloe 500 </span>&nbsp;
+              <input type="button"value="Buys3"onclick="Buys('bananas')"><br>
+
+             <input type="radio"id="Orang"value="900"> <span> Orang One Kiloe 900&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; </span>
+             <input type="button"value="Buys2"onclick="Buys('Orang')"><br>
+
+             <input type="radio"id="Apple"value="1000"> <span> Apple One Kiloe 1000 &nbsp;&nbsp;&nbsp;&nbsp;  </span>
+             <input type="button"value="Buys1"onclick="Buys('Apple')"><br>
+
+             <br><b>    Account :</b>
+             <p class="java1"id="java1">Account ....</p>
+            
+          </fieldset>
+        </form>
+        
+        <table style="border-style:solid;
+        border-width:2px;
+        width:100%;height:100px;padding:5px;">
+          <caption>Data Employ</caption>
+          <thead>
+            <tr>
+              <th>Pliant</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>program</td>
+              <td>1000</td>
+            </tr>
+             <tr>
+              <td>Base Data Basr</td>
+              <td>2000</td>
+            </tr> <tr>
+              <td>Information</td>
+              <td>500</td>
+            </tr> <tr>
+              <td>Wibside</td>
+              <td>10000</td>
+            </tr> <tr>
+              <td>JavaScrip</td>
+              <td>5000</td>
+            </tr>
+             <tr>
+              <td>program</td>
+              <td>1000</td>
+            </tr>
+            <tr>
+              <td>program</td>
+              <td>1000</td>
+            </tr>
+            <tfoot>
+               <tr>
+              <th>sumition</th>
+              <th>8580</th>
+            </tr>
+              
+            </tfoot>
+          
+            
+            
+            
+            
+            
+          </tbody>
+          
+          
+          
+          
+          
+        </table>
+      <script src="javascript1.js">
+
+
+      </script>  
+    </body>

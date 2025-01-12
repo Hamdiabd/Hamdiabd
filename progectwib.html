@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>wib</title>
+  <style>
+
+  p.amge{
+    background-image:url("/project1/واتس-اب-الاخضر-العادي.png");
+    background-repeat:no-repeat;
+    background-position:fixed;
+    
+  }
+    form {
+      background: #f5fffa;
+      border: 2px hidden black;
+      max-width: 390px;
+      margin: 0 auto;
+    }
+         a {
+           display:block ;
+           background:green;
+           text-decoration:none;
+           border:1px solid;
+           border-radius:5px;
+           padding:10px;
+           margin-top:12px;
+           
+        }
+        p.image2{
+          border-color:red;padding:5px;
+        }
+        a[name="wat"]{
+          background-color:transparent;
+        border-color:none; 
+        border-style:none;}
+        
+        img{background-color:white;
+          border-radius:10px;
+        }
+     fieldset.h1{background:#dcdcdc;}
+    fieldset {
+      width: 300px;text-align:center ;
+      height:500px;
+      background:white;
+      color:black;
+      margin:10px auto;
+      padding: 10px;
+    }
+    img{display:block;margin:0 auto;}
+    legend {
+      background-color:white;
+  
+      color:black;font-size:20px;
+      font-weight:bold;
+      width:340px;padding:20px;
+     }
+     h3{display:inline-block;}
+    input[type="text"] {
+      width: 50%;
+      padding: 5px;
+    }
+    fieldset.personal{background:#9BAAB5;height:600px;}
+
+  </style>
+</head>
+<body>
+
+  <form>
+     <fieldset class="h1">
+        <legend>HTML</legend>
+             <div></div>
+             <img src="/project1/tas8db4xhg254qaztdz9.jpg" width="300px" height="300px" alt="IT Thumbnail">
+     
+           <span>
+               هي لغة ترميز تستخدم لتصميم واجهات ويب لنتعلم وسوم html</span>
+                     <div><a href="learnhtml.html"larget="_blank">LEARN HTML</a></div>
+             
+  
+      </fieldset>
+  
+      <fieldset>
+       <legend>CSS</legend>
+            <img src="/project1/free-css-3d-icon-download-in-png-blend-fbx-gltf-file-formats--logo-interface-website-isolated-programming-language-pack-logos-icons-5453030.png" width="300px" height="300px" alt="IT Thumbnail"
+            style="width"onclick="getcoordinates(event)"
+             usemap="#planetmap"/>
+             <map name="planetmap">
+               <area shape="rect"coords="0,0,290,290"href="#watsup" >
+               
+               
+               
+               
+             </map>
+             
+     
+           <span>
+               هي لغة ترميز تستخدم لتصميم واجهات ويب لنتعلم وسوم CSS</span>
+                     <div><a href="learncss.html"larget="_blank">Learn CSS</a></div>
+             
+  
+    </fieldset>
+    <fieldset>
+       <legend>JavaScript</legend>
+        <img src="/project1/171-1718042_javascript-logo-png-transparent-png.png"width="300px"height="300px"
+        alt="not fond">
+    </fieldset>
+    
+    
+    
+    
+    <fieldset class="personal">
+       <legend>personal</legend>
+           <a href="https://wa.me/+967778461645"target="_blank"name="wat">واتساب</a>
+           <img src="/project1/واتس-اب-الاخضر-العادي.png"width="100px"height="100px"alt="not fond"usemap="#watsup"style="width"onclick="getcoordinates(event)">
+             <map name="watsup">
+             <area shape="rect"coords="0,0,90,98"href="https://wa.me/+967778461645"target="-blank"/>
+           </map>
+        
+            <a href="https://t.me/+967778461645"target="_blank"name="wat">تيلجرام</a>
+            <img src="/project1/1200x630wa.png"width="100px"height="100px"alt="not fond"style="width"onclick="getcoordinates(event)"usemap="#telegram">
+              <map name="telegram">
+             <area shape="rect"coords="0,0,90,98"href="https://t.me/+967778461645"target="-blank"/>
+           </map>
+            
+           <a href="tel:+967778461645"target="_blank"name="wat">تواصل خاص</a>
+                     <img src="/project1/call person .jpg"width="100px"height="100px"alt="not fond">
+                       <p id='watsup'></p>
+  
+    </fieldset>
+  </form>
+      <p id="image"class="image2">Yemeni</p>
+  <script>
+    function getcoordinates(event)
+    {
+      const x=event.offsetX;
+      const y=event.offsetY;
+      const getid=document.getElementById('image');
+      getid.textContent=`coordinates:X=${x},Y=${y}`;
+    
+    }
+    
+    
+  </script>
+</body>
+</html>
